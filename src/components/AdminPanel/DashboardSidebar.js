@@ -1,182 +1,81 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import "tailwindcss/tailwind.css";
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+  AiFillHome,
+} from "react-icons/ai";
+import {
+  PiCalendarStarBold,
+  PiFolders,
+} from "react-icons/pi";
+import {
+  MdOutlineAnalytics,
+} from "react-icons/md";
+import {
+  HiOutlineNewspaper,
+} from "react-icons/hi2";
+import {
+  IoBagRemoveOutline,
+  IoSearch,
+} from "react-icons/io5";
 
+const SidebarItem = ({ icon: Icon, label, path }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  // const isActive = location.pathname === path;
+  
+  const isActive = path.includes(location.pathname);
 
-import { PiCalendarStarBold, PiFolders } from "react-icons/pi";
-import { MdOutlineAnalytics } from "react-icons/md";
-import { AiFillHome } from 'react-icons/ai';
-import { HiOutlineNewspaper, HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
-import { IoBagRemoveOutline, IoPeopleOutline, IoSettingsOutline, IoSearch,} from "react-icons/io5";
-import { FaRegFlag } from "react-icons/fa";
-import { GoShieldCheck } from "react-icons/go";
-import { LuBadgeHelp} from "react-icons/lu";
-
-// import LogoDash from "../Image/logo_dash.png";
-
+  return (
+    <li
+      className={`flex items-center gap-3 px-6 py-3 rounded-l-full cursor-pointer transition-colors duration-200 ${
+        isActive
+          ? "bg-gray-100 text-accent font-semibold shadow"
+          : "text-gray-600 hover:bg-blue-50 hover:text-accent"
+      }`}
+      onClick={() => navigate(path[0])}
+    >
+      <Icon className="text-lg" />
+      <span>{label}</span>
+    </li>
+  );
+};
 
 const DashboardSidebar = () => {
-    const navigate = useNavigate();
-    return (
-      <aside className="w-80 h-screen p-4 flex flex-col overflow-y-auto">
-        <div className="hidden lg:flex items-center rounded-md px-3 py-2 w-full max-w-md border border-gray-300 shadow-2xl hover:border-white">
-          <IoSearch className="text-white mr-3 size-5" />
+  return (
+    <aside className="w-72 bg-white h-screen flex flex-col rounded-xl">
+      <div className="px-4 py-6 ">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-blue-200" />
+          <div>
+            <h2 className="text-lg font-semibold text-gray-800">File MG</h2>
+            <p className="text-sm text-gray-500">Ryan Aldridge</p>
+          </div>
+        </div>
+      </div>
+      <div className="px-4">
+        <div className="flex items-center px-4 py-2 border border-gray-300 bg-gray-100 rounded-md mb-4">
+          <IoSearch className="text-gray-500 mr-2" />
           <input
             type="text"
             placeholder="Search"
-            className="bg-transparent outline-none w-full text-white placeholder-white"
+            className="w-full bg-transparent outline-none placeholder-gray-500 text-sm"
           />
         </div>
+      </div>
 
-        <div className="flex text-white mb-2 mt-6 text-sm font-semibold">General</div>
-        <ul className="pl-2 text-base">
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer" onClick={() => navigate("")}>
-            <AiFillHome className="mr-2 size-5" />
-            <p>Dashboard</p>
-          </li>
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer" onClick={() => navigate("/user_menu")}>
-            <PiCalendarStarBold className="mr-2 size-5" />
-            <p>User Menu</p>
-          </li>
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer" onClick={() => navigate("/admin_user_form")}>
-            <MdOutlineAnalytics className="mr-2 size-5" />
-            <p>Admin User Form</p>
-          </li>
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer" onClick={() => navigate("/loan_system_config")}>
-            <HiOutlineNewspaper className="mr-2 size-5" />
-            <p>System Configuration</p>
-          </li>
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer">
-            <IoBagRemoveOutline className="mr-2 size-5" />
-            <p>Recruitment</p>
-          </li>
-          <li className="py-2 text-white hover:text-blue-300 flex items-center cursor-pointer">
-            <PiFolders className="mr-2 size-5" />
-            <p>Projects</p>
-          </li>
-        </ul>
-        <hr className="border-gray-300 my-3" />
-
-        <div className="flex text-white mb-2 text-sm font-semibold">MySpace</div>
-        <ul className="pl-2 text-base">
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer">
-            <FaRegFlag className="mr-2 size-5" />
-            <p>Activity</p>
-          </li>
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer">
-            <IoPeopleOutline className="mr-2 size-5" />
-            <p>Shared</p>
-          </li>
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer">
-            <GoShieldCheck className="mr-2 size-5" />
-            <p>Privacy</p>
-          </li>
-        </ul>
-        <hr className="border-gray-300 my-3" />
-
-        <div className="flex text-white mb-2 text-sm font-semibold">Support</div>
-        <ul className="pl-2 text-base">
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer">
-            <IoSettingsOutline className="mr-2 size-5" />
-            <p>Setting</p>
-          </li>
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer">
-            <LuBadgeHelp className="mr-2 size-5" />
-            <p>Help!</p>
-          </li>
-          <li className="py-1 text-white hover:text-blue-300 flex items-center cursor-pointer">
-            <HiOutlineChatBubbleLeftRight className="mr-2 size-5" />
-            <p>Chat</p>
-          </li>
-        </ul>
-        <hr className="border-gray-300 my-3" />
-      </aside>
+      <div className="text-xs font-bold text-gray-400 px-4 uppercase mb-3">Menu</div>
+      <ul className="space-y-1 pl-5">
+        <SidebarItem icon={AiFillHome} label="Dashboard" path="/dashboard" />
+        <SidebarItem icon={PiCalendarStarBold} label="User Menu" path="/user_menu_data" />
+        <SidebarItem icon={MdOutlineAnalytics} label="Role Creation" path="/admin_user_data" />
+        <SidebarItem icon={HiOutlineNewspaper} label="System Configuration" path="/loan_system_config" />
+        <SidebarItem icon={IoBagRemoveOutline} label="Login" path="/login" />
+        <SidebarItem icon={PiFolders} label="Menu Creation" path={["/menu_creation", "/access_control"]}/>
 
 
-
-
-      // <aside className="w-80 h-screen bg-slate p-4 flex flex-col overflow-y-auto">
-        
-  
-      //     <div className="hidden lg:flex items-center rounded-md px-3 py-2 w-full max-w-md border border-gray-300 shadow-2xl hover:border-black">
-      //     <IoSearch className="text-gray-500 mr-3 size-5" />
-      //     <input
-      //         type="text"
-      //         placeholder="Search"    
-      //         className="bg-transparent outline-none w-full text-gray-700"
-      //     />
-      //     </div>
-        
-      //   <div className="flex text-gray-400 mb-2 mt-6 text-sm font-semibold ">General</div>  
-      //   <ul className="pl-2 text-base">
-      //     <li className="py-1 text-gray-100 hover:text-gray-300 flex items-center cursor-pointer"
-      //         onClick={() => navigate("")}>
-      //       <AiFillHome className="mr-2 size-5" />
-      //       <p>Dashboard</p>
-      //     </li>
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer"
-      //         onClick={() => navigate("/user_menu")}>
-      //       <PiCalendarStarBold className="mr-2  size-5" />
-      //       <p>User Menu</p>
-      //     </li>
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer"
-      //       onClick={() => navigate("/admin_user_form")}>
-      //       <MdOutlineAnalytics    className="mr-2 size-5" />
-      //       <p>Admin User Form</p>
-      //     </li>
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer"
-      //     onClick={() => navigate("/loan_system_config")}>
-      //       <HiOutlineNewspaper className="mr-2 size-5" />
-      //       <p>System Configuration</p>
-      //     </li>
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer">
-      //       <IoBagRemoveOutline className="mr-2 size-5" />
-      //       <p>Recruitment</p>
-      //     </li>
-      //     <li className="py-2 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer">
-      //       <PiFolders  className="mr-2 size-5" />
-      //       <p>Projects</p> 
-      //     </li>
-      //   </ul>
-      //   <hr className="border-gray-300 my-3"/>
-  
-  
-      //   <div className="flex text-gray-400 mb-2 text-sm font-semibold ">MySpace</div>  
-      //   <ul className="pl-2 text-base">
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer">
-      //       <FaRegFlag className="mr-2 size-5" />
-      //       <p>Activity</p>
-      //     </li>
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer">
-      //       <IoPeopleOutline className="mr-2  size-5" />
-      //       <p>Shared</p>
-      //     </li>
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer">
-      //       <GoShieldCheck className="mr-2 size-5" />
-      //       <p>Privary</p>
-      //     </li>
-      //   </ul>
-      //   <hr className="border-gray-300 my-3"/>
-  
-      //   <div className="flex text-gray-400 mb-2 text-sm font-semibold ">Support</div>  
-      //   <ul className="pl-2 text-base">
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer">
-      //       <IoSettingsOutline className="mr-2 size-5" />
-      //       <p>Setting</p>
-      //     </li>
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer">
-      //       <LuBadgeHelp className="mr-2  size-5" />
-      //       <p>Help!</p>
-      //     </li>
-      //     <li className="py-1 text-gray-700 hover:text-gray-900 flex items-center cursor-pointer">
-      //       <HiOutlineChatBubbleLeftRight className="mr-2 size-5" />
-      //       <p>Chat</p>
-      //     </li>
-      //   </ul>
-      //   <hr className="border-gray-300 my-3"/>
-      // </aside>
-    );
-  };
-
+      </ul>
+    </aside>
+  );
+};
 
 export default DashboardSidebar;

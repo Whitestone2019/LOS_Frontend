@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { FaCog, FaTrash, FaPlus, FaSave } from 'react-icons/fa';
 
+import DashboardSidebar from "./DashboardSidebar";
+import DashboardHead from "./DashboardHead";
+
+
+
 const LoanSystemConfig = () => {
   const [minRate, setMinRate] = useState('');
   const [maxRate, setMaxRate] = useState('');
@@ -95,6 +100,15 @@ const LoanSystemConfig = () => {
   };
 
   return (
+
+    <div className="lg:flex md:block font-inter">
+  <div className="h-screen hidden lg:block fixed z-20">
+    <DashboardSidebar />
+  </div>
+    <main className="flex-1 lg:ml-72">
+      <DashboardHead />
+
+
     <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-start">
       <h1 className="text-3xl font-bold text-black-600 mb-6">
         System Configuration
@@ -264,7 +278,7 @@ const LoanSystemConfig = () => {
         <div className="text-left">
           <button
             onClick={handleSave}
-            className={`bg-[#001F54] text-white px-6 py-2 rounded hover:bg-blue-900 transition flex items-center gap-2 ${
+            className={`bg-accent text-white px-6 py-2 rounded hover:bg-secondary transition flex items-center gap-2 ${
               Object.keys(errors).length > 0 ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             disabled={Object.keys(errors).length > 0}
@@ -275,6 +289,8 @@ const LoanSystemConfig = () => {
         </div>
       </div>
     </div>
+    </main>
+  </div>
   );
 };
 
