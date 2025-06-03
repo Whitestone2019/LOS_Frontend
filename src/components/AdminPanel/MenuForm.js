@@ -109,16 +109,16 @@ const MenuForm = () => {
       <main className="flex-1 lg:ml-72">
         <DashboardHead />
 
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white rounded-3xl shadow-lg max-w-2xl w-full p-8">
-        <h2 className="text-2xl font-bold mb-6 text-blue-600 flex items-center gap-2">
+        <h2 className="text-2xl font-bold mb-6 text-accent flex items-center gap-2">
           📝 Add Menu
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="flex gap-4 items-end mb-6 flex-wrap">
+          <div className="flex gap-4 items-center mb-6 flex-col flex-1">
            
-            <div className="w-full sm:w-1/2">
+            <div className="w-full">
               <label htmlFor="name" className="block mb-1 font-medium text-gray-700">
                 Menu Name:
               </label>
@@ -130,12 +130,12 @@ const MenuForm = () => {
                 onChange={handleChange}
                 required
                 placeholder="Enter menu name"
-                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-accent"
               />
             </div>
 
            
-            <div className="w-full sm:w-1/2">
+            <div className="w-full">
               <label htmlFor="parent" className="block mb-1 font-medium text-gray-700">
                 Parent Menu:
               </label>
@@ -144,7 +144,7 @@ const MenuForm = () => {
                 name="parent"
                 value={formData.parent}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 {parentMenuOptions.map((menu) => (
                   <option key={menu} value={menu}>
@@ -155,7 +155,7 @@ const MenuForm = () => {
             </div>
 
             {/* Icon Dropdown */}
-            <div className="w-full sm:w-1/2">
+            <div className="w-full">
               <label htmlFor="icon" className="block mb-1 font-medium text-gray-700">
                 Select Icon:
               </label>
@@ -164,7 +164,7 @@ const MenuForm = () => {
                 name="icon"
                 value={formData.icon}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 <option value="">-- Auto-select based on name --</option>
                 {Object.entries(iconMap).map(([key]) => (
@@ -184,10 +184,10 @@ const MenuForm = () => {
           )}
 
          
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-row gap-4">
             <button
               type="submit"
-              className="w-full sm:w-[200px] bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition"
+              className="w-full bg-accent text-white py-2 rounded-xl hover:bg-secondary transition"
             >
               ➕ Add Menu
             </button>
@@ -195,7 +195,7 @@ const MenuForm = () => {
             <button
               type="button"
               onClick={() => navigate("/access_control")}
-              className="w-full sm:w-[200px] bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition"
+              className="w-full bg-accent text-white py-2 rounded-xl hover:bg-secondary transition"
             >
               View Menu
             </button>

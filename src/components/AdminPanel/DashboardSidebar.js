@@ -21,9 +21,11 @@ import {
 const SidebarItem = ({ icon: Icon, label, path }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  
   // const isActive = location.pathname === path;
   
   const isActive = path.includes(location.pathname);
+
 
   return (
     <li
@@ -65,12 +67,13 @@ const DashboardSidebar = () => {
 
       <div className="text-xs font-bold text-gray-400 px-4 uppercase mb-3">Menu</div>
       <ul className="space-y-1 pl-5">
-        <SidebarItem icon={AiFillHome} label="Dashboard" path="/dashboard" />
-        <SidebarItem icon={PiCalendarStarBold} label="User Menu" path="/user_menu_data" />
-        <SidebarItem icon={MdOutlineAnalytics} label="Role Creation" path="/admin_user_data" />
-        <SidebarItem icon={HiOutlineNewspaper} label="System Configuration" path="/loan_system_config" />
-        <SidebarItem icon={IoBagRemoveOutline} label="Login" path="/login" />
-        <SidebarItem icon={PiFolders} label="Menu Creation" path={["/menu_creation", "/access_control"]}/>
+        <SidebarItem icon={AiFillHome} label="Dashboard" path={["/dashboard"]} />
+        <SidebarItem icon={PiCalendarStarBold} label="User Menu" path={["/user_menu_data"]} />
+        <SidebarItem icon={MdOutlineAnalytics} label="Role Creation" path={["/admin_user_data"]} />
+        <SidebarItem icon={HiOutlineNewspaper} label="System Configuration" path={["/loan_system_config"]} />
+        <SidebarItem icon={IoBagRemoveOutline} label="Login" path={["/login"]} />
+        <SidebarItem icon={PiFolders} label="Menu Creation" path={["/menu_creation", "/access_control"]} />
+        <SidebarItem icon={IoSearch} label="Organization Form" path={["/organization_form"]} />
 
 
       </ul>
