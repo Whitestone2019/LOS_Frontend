@@ -21,7 +21,7 @@ const LoginPage = () => {
       console.log('Form submitted:', { userType, username, password });
       
     }
-    navigate('/dashboard'); // Redirect to dashboard after successful login
+    navigate('/user_menu_data'); // Redirect to dashboard after successful login
     
   };
 

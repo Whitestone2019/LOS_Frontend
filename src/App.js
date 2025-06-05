@@ -14,6 +14,7 @@ import Login from "./components/Login";
 import MenuForm from "./components/AdminPanel/MenuForm";
 import AccessControl from "./components/AdminPanel/AccessControl";
 import OrganizationForm from "./components/AdminPanel/OrganizationForm";
+import MultiStepForm from "./components/AdminPanel/MultiStepForm";
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/access_control" element={<AccessControl />} />
           <Route path="/login" element={<Login />} />
           <Route path="/organization_form" element={<OrganizationForm />} />
+          <Route path="/application_form" element={<MultiStepForm />} />
 
           {/* Add more routes as needed */}
         </Routes>

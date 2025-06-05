@@ -10,6 +10,8 @@ import {
   FaUserCircle,
   FaInfoCircle,
   FaBell,
+  FaEdit,
+  FaTrash,
 } from "react-icons/fa";
 
 import DashboardSidebar from "./DashboardSidebar";
@@ -65,6 +67,9 @@ const AccessControl = () => {
 
   const toggleExpand = (id) => {
     setExpandedMenus((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+const editMenu = (menu) => {
+    navigate(`/menu_creation`);
   };
 
   const handlePermissionChange = (id, type) => {
@@ -181,6 +186,7 @@ const AccessControl = () => {
               >
                 {menu.name}
               </Link>
+
             </div>
           </td>
 
@@ -194,7 +200,24 @@ const AccessControl = () => {
               />
             </td>
           ))}
+
+          <td className="flex justify-center gap-2 py-2">
+            <button
+              onClick={() => editMenu(menu)}
+              className="text-blue-500 hover:underline text-sm"
+            >
+              
+                <FaEdit />
+            </button>
+            <button
+              // onClick=}
+              className="text-red-500 hover:underline text-sm"
+            >
+              <FaTrash />
+            </button>
+          </td>
         </tr>
+
 
         {hasChildren &&
           isExpanded &&
@@ -245,6 +268,7 @@ const AccessControl = () => {
               <th className="p-3 text-center">Write</th>
               <th className="p-3 text-center">View</th>
               <th className="p-3 text-center">All</th>
+              <th className="p-3 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
