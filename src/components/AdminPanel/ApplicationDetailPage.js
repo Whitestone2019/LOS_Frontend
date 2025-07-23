@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import DashboardHead from "./DashboardHead";
-import DashboardSidebar from "./DashboardSidebar";
 import {
   getApplicationDetailsByNumber,
   getLinkedBankAccount,
@@ -66,11 +64,10 @@ const ApplicationDetailPage = () => {
     } else alert("Failed to delete");
   };
 
-  // Helper to nicely render object as "Label: Value" side-by-side
- const renderObject = (obj) => {
+const renderObject = (obj) => {
   const entries = Object.entries(obj);
-
   const rows = [];
+
   for (let i = 0; i < entries.length; i += 2) {
     const [k1, v1] = entries[i];
     const [k2, v2] = entries[i + 1] || [];
@@ -81,15 +78,11 @@ const ApplicationDetailPage = () => {
         .replace(/^./, (str) => str.toUpperCase());
 
       let displayValue = "";
-      if (typeof value === "boolean") {
-        displayValue = value ? "Yes" : "No";
-      } else if (typeof value === "object" && value !== null) {
-        displayValue = JSON.stringify(value, null, 2);
-      } else if (String(value).includes("T") && String(value).includes(":")) {
+      if (typeof value === "boolean") displayValue = value ? "Yes" : "No";
+      else if (typeof value === "object" && value !== null) displayValue = JSON.stringify(value, null, 2);
+      else if (String(value).includes("T") && String(value).includes(":"))
         displayValue = new Date(value).toLocaleString();
-      } else {
-        displayValue = String(value ?? "-");
-      }
+      else displayValue = String(value ?? "-");
 
       return (
         <div className="flex-1 min-w-[200px]">
@@ -102,16 +95,24 @@ const ApplicationDetailPage = () => {
     rows.push(
       <div
         key={i}
-        className="flex flex-col md:flex-row gap-6 bg-white p-4 rounded-xl shadow hover:shadow-md transition mb-3"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3"
       >
-        {format(k1, v1)}
-        {k2 && format(k2, v2)}
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow hover:shadow-2xl border hover:border-primary/60 transition">
+          {format(k1, v1)}
+        </div>
+
+        {k2 && (
+          <div className="bg-white p-4 sm:p-6 rounded-xl shadow hover:shadow-2xl border hover:border-primary transition">
+            {format(k2, v2)}
+          </div>
+        )}
       </div>
     );
   }
 
   return <div>{rows}</div>;
 };
+
 
 
   const tabTitleMap = {
@@ -133,21 +134,22 @@ const ApplicationDetailPage = () => {
   }[activeTab];
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-start py-10 px-4">
-      <div className="max-w-5xl w-full bg-white rounded-xl shadow-lg p-8">
-        <h1 className="text-2xl font-bold mb-6 text-accent">
+    <div className="min-h-screen bg-gray-100 flex flex-col lg:pr-7 py-6">
+      <div className="w-full max-w-screen-xl mx-auto bg-white rounded-xl transition text-base p-4 sm:p-6">
+
+        <h1 className="text-xl sm:text-2xl font-semibold  mb-4 sm:mb-6 text-black-200">
           {tabTitleMap[activeTab]} - {applicationNumber}
         </h1>
 
-        <div className="flex gap-6 mb-8 border-b border-gray-300 text-sm">
+        <div className="flex flex-wrap gap-6 mb-2 border-b border-gray-400 text-sm sm:text-base">
           {Object.keys(tabTitleMap).map((tab) => (
             <div
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`cursor-pointer pb-2 ${
                 activeTab === tab
-                  ? "border-b-4 border-blue-600 text-blue-600 font-semibold"
-                  : "text-gray-600 hover:text-blue-600"
+                  ? "border-b-4 border-accent text-accent font-semibold"
+                  : "text-gray-600 hover:text-accent-600"
               }`}
             >
               {tab}
@@ -155,8 +157,7 @@ const ApplicationDetailPage = () => {
           ))}
         </div>
 
-        <div>
-          {/* Show data or "No data found" */}
+        <div className="bg-accent/20 p-6 rounded-2xl ">
           {activeTab === "Application Details" && details ? (
             <>
               {renderObject(details.applicationDetails ?? {})}

@@ -185,12 +185,13 @@ const SubmittedApplication = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 pt-6 pr-8">
-      <div className="max-w-6xl mx-auto bg-white shadow px-4 py-6 rounded-xl">
+      <div className="max-w-8xl mx-auto bg-white shadow px-4 py-6 rounded-xl">
         {step === 1 && userRole === "admin" ? (
           <>
             <h2 className="text-2xl font-bold mb-4 text-accent">Select Columns to Display</h2>
-            <table className="min-w-full text-sm border rounded-lg overflow-hidden">
-              <thead className="bg-gray-100">
+           <div className="max-h-[450px] overflow-y-auto custom-scrollbar border rounded-lg">
+            <table className="min-w-full text-sm">
+              <thead className="bg-gray-100 sticky top-0">
                 <tr>
                   <th className="p-3 font-medium">Label</th>
                   <th className="p-3 font-medium text-center">Show</th>
@@ -205,13 +206,14 @@ const SubmittedApplication = () => {
                         type="checkbox"
                         checked={!!selected[col.key]}
                         onChange={() => toggleColumn(col.key)}
-                        className="accent-blue-600 w-4 h-4"
+                        className="accent-primary w-4 h-4 text-white"
                       />
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            </div>
             <button
               onClick={handleContinue}
               className="mt-4 px-6 py-2 rounded bg-accent text-white hover:bg-secondary"
@@ -300,8 +302,9 @@ const SubmittedApplication = () => {
             {!hasVisibleColumns ? (
               <p className="text-gray-500">No visible columns selected by admin.</p>
             ) : (
-              <div className="overflow-x-auto border rounded-lg">
-                <table className="min-w-full text-sm text-left">
+             <div className="max-h-[500px] overflow-auto border rounded-lg">
+  <table className="min-w-full text-sm text-left">
+
                   <thead className="bg-gray-100">
                     <tr>
                       {Object.entries(selected).map(
